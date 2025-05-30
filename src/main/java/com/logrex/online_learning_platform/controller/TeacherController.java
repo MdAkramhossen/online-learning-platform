@@ -22,7 +22,7 @@ public class TeacherController {
         TeacherDTO savedTeacher = teacherService.createTeacher(teacherDTO);
         return new ResponseEntity<>(savedTeacher, HttpStatus.CREATED);
     }
-        @GetMapping("/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<TeacherDTO> getTeacher(@PathVariable int id) {
         TeacherDTO dto = teacherService.getTeacherById(id);
             return ResponseEntity.ok(dto);

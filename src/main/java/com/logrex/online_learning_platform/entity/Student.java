@@ -7,35 +7,35 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "techer")
-@Setter
-@Getter
+@Table(name = "student")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Teacher {
+
+public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
-    @Column(name = "name")
+    private Long id;
     private String name;
-
-    @Column(name = "email")
     private String email;
 
-    @OneToMany(mappedBy = "teacher",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
     @JsonIgnore
-    private List<Course> courses;
+    private List<Enrollment> enrollments = new ArrayList<>();
 
-    public int getId() {
+    @OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Rating> ratings = new ArrayList<>();
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -55,11 +55,19 @@ public class Teacher {
         this.email = email;
     }
 
-    public List<Course> getCourses() {
-        return courses;
+    public List<Enrollment> getEnrollments() {
+        return enrollments;
     }
 
-    public void setCourses(List<Course> courses) {
-        this.courses = courses;
+    public void setEnrollments(List<Enrollment> enrollments) {
+        this.enrollments = enrollments;
+    }
+
+    public List<Rating> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(List<Rating> ratings) {
+        this.ratings = ratings;
     }
 }

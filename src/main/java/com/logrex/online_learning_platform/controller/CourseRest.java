@@ -3,6 +3,7 @@ package com.logrex.online_learning_platform.controller;
 
 import com.logrex.online_learning_platform.dto.CourseDTO;
 import com.logrex.online_learning_platform.dto.LectureDTO;
+import com.logrex.online_learning_platform.dto.RatingDTO;
 import com.logrex.online_learning_platform.service.CourseService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +52,11 @@ public class CourseRest {
         return ResponseEntity.noContent().build();
     }
 
-
+    @GetMapping("/{courseId}/ratings")
+    public ResponseEntity<List<RatingDTO>> getRatingsForCourse(@PathVariable int courseId) {
+        List<RatingDTO> ratings = courseService.getCourseRatings(courseId);
+        return ResponseEntity.ok(ratings);
+    }
 
 
 
